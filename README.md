@@ -19,20 +19,26 @@ Google Drive Client
 ### 認証情報の設定
 
 * 最初はブラウザが起動できる環境で！
+
   sshでリモートログインしている場合は要注意！
   
 1. aaaa
 
-  1.1. aaaaa
-
-  1.2.  bbfksljf
-
   ljdfslakjfa
+  
+  ｊｆｄｌさｊｌｋｆだ
 
-a. klfjlsd
+2. klfjlsd
 
-b. jfkldsjl
+ｋｄｌじゃｆｌ
+ｆｋｄぁｊｆぁ
 
+3. jfkldsjl
+
+ｌｋｄさｊ；ｆｌｄｊｌ
+ｌｋｊｆｌだ
+
+ｋｌｄふぁｊ；
 
 
 ## 参考
