@@ -23,21 +23,20 @@ VERSION = '0.00'
 class ClassApp:
     _log = get_logger(__name__, False)
 
-    def __init__(self, top_folder, dst, dl_flag=False, debug=False):
+    def __init__(self, top_folder, dl_dst=None, debug=False):
         self._dbg = debug
         __class__._log = get_logger(__class__.__name__, self._dbg)
-        self._log.debug('top_folder=%s dst=%s, dl_flag=%s',
-                        top_folder, dst, dl_flag)
+        self._log.debug('top_folder=%s dl_dst=%s',
+                        top_folder, dl_dst)
 
         self._top_folder = top_folder
-        self._dst = dst
-        self._dl_flag = dl_flag
-        
+        self._dl_dst = dl_dst
+
         try:
             self._gauth = GoogleAuth()
         except Exception as e:
             self._debug('%s:%s', type(e), e)
-            
+
         self._gauth.LocalWebserverAuth()
 
         self._drv = GoogleDrive(self._gauth)
@@ -50,7 +49,7 @@ class ClassApp:
             self._log.error('???')
             return
 
-        self.get_list(self._top_folder, self._dst, top_id, self._dl_flag)
+        self.get_list(self._top_folder, self._dl_dst, top_id)
 
     def get_folder_id(self, folder_name):
         """
@@ -65,14 +64,14 @@ class ClassApp:
 
         return ids[0]['id']
 
-    def get_list(self, folder_title='', dst='.', fid=None, download_flag=False):
+    def get_list(self, folder_title='', dst=None, fid=None):
         """
         get_list
         """
-        self._log.debug('folder_title=%s, dst=%s, fid=%s, download_flag=%s',
-                        folder_title, dst, fid, download_flag)
+        self._log.debug('folder_title=%s, dst=%s, fid=%s',
+                        folder_title, dst, fid)
 
-        if download_flag:
+        if dst is not None:
             """
             make destination directory
             """
@@ -83,7 +82,7 @@ class ClassApp:
             except Exception as e:
                 self._log.error('%s:%s', type(e), e)
                 return
-                    
+
         """
         get file list
         """
@@ -106,9 +105,10 @@ class ClassApp:
             print('%s/%s (%s)' % (folder_title, f['title'], f['mimeType']))
 
             if f['mimeType'] == 'application/vnd.google-apps.folder':
-                self.get_list('%s/%s' % (folder_title, f['title']), dst,
-                              f['id'], download_flag)
-            elif download_flag:
+                self.get_list('%s/%s' % (folder_title, f['title']),
+                              dst,
+                              f['id'])
+            elif dst is not None:
                 """
                 download file
                 """
@@ -119,18 +119,19 @@ class ClassApp:
 
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.argument('top_folder')
-@click.argument('dst_dir')
-@click.option('--download', '-dl', 'download', is_flag=True, default=False,
-              help='download flag')
+@click.option('--download', '-dl', 'download', type=str, default='',
+              help='download to destination directory')
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
-def main(top_folder, dst_dir, download, debug):
+def main(top_folder, download, debug):
     _log = get_logger(__name__, debug)
-    _log.info('top_folder=%s, dst_dir=%s, download=%s',
-              top_folder, dst_dir, download)
+    _log.info('top_folder=%s, download=%s',
+              top_folder, download)
 
-    app = ClassApp(top_folder=top_folder, dst=dst_dir, dl_flag=download,
-                   debug=debug)
+    if download == '':
+        download = None
+
+    app = ClassApp(top_folder=top_folder, dl_dst=download, debug=debug)
     try:
         app.main()
     finally:
