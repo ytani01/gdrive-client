@@ -1,8 +1,6 @@
-# gdrive-client
+# gdrive-client -- Google Drive Client
 
-Google Drive Client
-
-list and download files
+List and download files
 
 
 ## 1. 設定
