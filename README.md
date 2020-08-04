@@ -14,6 +14,7 @@ Google Drive Client
 2. 「Google Drive API」を`有効にする`
 3. 認証情報(`OAuth クライアント ID`)を作成
 4. 認証情報(JSONファイル)をダウンロード
+   ファイル名: `client_secret.json`
 
 
 ### 認証情報の設定
@@ -21,7 +22,17 @@ Google Drive Client
 * 最初はブラウザが起動できる環境で！
   sshでリモートログインしている場合は要注意！
 
-####
+## Install
+
+```bash
+$ python3 -m venv env1
+$ cd env1
+$ . ./bin/activate
+(env1)$ git clone https://github.com/ytani01/gdrive-client.git
+(env1)$ cd gdrive-client
+(env1)$ pip install -r requirements.txt
+(env1)$ cp {上記で保存した client_secret.json} .
+```
 
 ## 参考
 
