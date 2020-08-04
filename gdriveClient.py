@@ -45,17 +45,20 @@ class ClassApp:
         self._log.debug('')
 
         top_id = self.get_folder_id(self._top_folder)
-        if len(top_id) == 0:
+        if top_id is not None and len(top_id) == 0:
             self._log.error('???')
             return
 
         self.get_list(self._top_folder, self._dl_dst, top_id)
 
-    def get_folder_id(self, folder_name):
+    def get_folder_id(self, folder_name='.'):
         """
         get_folder_id
         """
         self._log.debug('folder_name=%s', folder_name)
+
+        if folder_name == '.':
+            return None
 
         ids = self._drv.ListFile({'q': "title='%s'" % folder_name}).GetList()
         if len(ids) != 1:
@@ -64,7 +67,7 @@ class ClassApp:
 
         return ids[0]['id']
 
-    def get_list(self, folder_title='', dst=None, fid=None):
+    def get_list(self, folder_title='.', dst=None, fid=None):
         """
         get_list
         """
@@ -87,9 +90,14 @@ class ClassApp:
         get file list
         """
         try:
-            flist = self._drv.ListFile({
-                'q': '"%s" in parents and trashed = false' % fid
-            }).GetList()
+            if fid is None:
+                flist = self._drv.ListFile({
+                    'q': '"root" in parents and trashed = false'
+                }).GetList()
+            else:
+                flist = self._drv.ListFile({
+                    'q': '"%s" in parents and trashed = false' % fid
+                }).GetList()
         except Exception as e:
             self._log.error('%s:%s', type(e), e)
             return
@@ -113,8 +121,12 @@ class ClassApp:
                 download file
                 """
                 gf = self._drv.CreateFile({'id': f['id']})
-                self._log.debug('gf=%s', gf)
-                gf.GetContentFile('%s/%s/%s' % (dst, folder_title, f['title']))
+                try:
+                    print('-> %s/%s/%s' % (dst, folder_title, f['title']))
+                    gf.GetContentFile('%s/%s/%s' % (
+                        dst, folder_title, f['title']))
+                except Exception as e:
+                    self._log.warning('%s:%s', type(e), e)
 
 
 @click.command(context_settings=CONTEXT_SETTINGS)
@@ -127,6 +139,9 @@ def main(top_folder, download, debug):
     _log = get_logger(__name__, debug)
     _log.info('top_folder=%s, download=%s',
               top_folder, download)
+
+    if top_folder == '' or top_folder == '/':
+        top_folder = '.'
 
     if download == '':
         download = None
