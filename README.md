@@ -1,11 +1,12 @@
 # gdrive-client
 
 Google Drive Client
+list and download files
 
 
-## 設定
+## 1. 設定
 
-### Google Drive APIの利用登録
+### 1.1 Google Drive APIの利用登録
 
 [Google Drive Console](https://console.developers.google.com/) で、
 認証情報(JSONファイル)を作成し、ダウンロードする。
@@ -17,14 +18,15 @@ Google Drive Client
    ファイル名: `client_secret.json`
 
 
-### 認証情報の設定
+### 1.2 認証情報の設定
 
 * 最初はブラウザが起動できる環境で！
   sshでリモートログインしている場合は要注意！
 
-## Install
+## 2. Install
 
 ```bash
+$ cd
 $ python3 -m venv env1
 $ cd env1
 $ . ./bin/activate
@@ -34,7 +36,7 @@ $ . ./bin/activate
 (env1)$ cp {上記で保存した client_secret.json} .
 ```
 
-## usage
+## 3. usage
 
 ヘルプ参照
 
@@ -43,6 +45,6 @@ $ gdrive-client.sh ~/env1 -h
 ```
 
 
-## 参考
+## A. 参考
 
 * https://note.nkmk.me/python-pydrive-download-upload-delete/
