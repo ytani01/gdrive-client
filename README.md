@@ -21,6 +21,9 @@ List and download files
 
 * 下記の通りインストールして、最初は
   ブラウザが起動できる環境で`gdrive-client.sh`を実行する！
+  ```bash
+  $ gdrive-client.sh ~/env1 /
+  ```
 * sshでリモートログインしている場合は要注意！
 * 2回目以降は、GUIやブラウザは不要。
 
