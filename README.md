@@ -34,6 +34,15 @@ $ . ./bin/activate
 (env1)$ cp {上記で保存した client_secret.json} .
 ```
 
+## usage
+
+ヘルプ参照
+
+```bash
+$ gdrive-client.sh ~/env1 -h
+```
+
+
 ## 参考
 
 * https://note.nkmk.me/python-pydrive-download-upload-delete/
