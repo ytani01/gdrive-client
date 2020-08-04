@@ -41,6 +41,7 @@ $ . ./bin/activate
 (env1)$ cp {上記で保存した client_secret.json} .
 ```
 
+
 ## 3. usage
 
 ヘルプ参照
