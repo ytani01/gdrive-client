@@ -61,7 +61,7 @@ activatevenv () {
     if [ ! -z "$1" ]; then
         _VENVDIR=$1
 
-        tsechoeval ${_MYNAME} cd $_VENVDIR
+        tseval ${_MYNAME} cd $_VENVDIR
         _RESULT=$?
         if [ $_RESULT -ne 0 ]; then
             return $_RESULT
@@ -86,7 +86,7 @@ activatevenv () {
         deactivate
     fi
 
-    tsechoeval ${_MYNAME} . ./bin/activate
+    tseval ${_MYNAME} . ./bin/activate
     tsecho ${_MYNAME} "VIRTUAL_ENV=${VIRTUAL_ENV}"
 
     cd "$_PWD0"
