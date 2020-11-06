@@ -20,7 +20,7 @@ MYNAME = 'gdriveClient'
 VERSION = '0.00'
 
 
-class ClassApp:
+class GdriveClientApp:
     _log = get_logger(__name__, False)
 
     def __init__(self, top_folder, dl_dst=None, debug=False):
@@ -131,7 +131,7 @@ class ClassApp:
 
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.argument('top_folder')
-@click.option('--download', '-dl', 'download', type=str, default='',
+@click.option('--download', '-dl', '-dst', 'download', type=str, default='',
               help='download to destination directory')
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
@@ -146,7 +146,7 @@ def main(top_folder, download, debug):
     if download == '':
         download = None
 
-    app = ClassApp(top_folder=top_folder, dl_dst=download, debug=debug)
+    app = GdriveClientApp(top_folder=top_folder, dl_dst=download, debug=debug)
     try:
         app.main()
     finally:
