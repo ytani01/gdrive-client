@@ -51,7 +51,7 @@ class MyLogger:
         self.console_handler.setFormatter(self.handler_fmt)
 
         self.logger = getLogger(name)
-        self.logger.setLevel(INFO)
+        self.logger.setLevel(WARNING)
         self.logger.addHandler(self.console_handler)
         self.logger.propagate = False
 

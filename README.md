@@ -17,18 +17,7 @@ List and download files
    ファイル名: `client_secret.json`
 
 
-### 1.2 認証情報の設定
-
-* 下記の通りインストールして、最初は
-  ブラウザが起動できる環境で`gdrive-client.sh`を実行する！
-  ```bash
-  $ gdrive-client.sh ~/env1 /
-  ```
-* sshでリモートログインしている場合は要注意！
-* 2回目以降は、GUIやブラウザは不要。
-
-
-## 2. Install
+## 1.2 Install
 
 ```bash
 $ cd
@@ -39,10 +28,15 @@ $ . ./bin/activate
 (env1)$ cd gdrive-client
 (env1)$ pip install -r requirements.txt
 (env1)$ cp {上記で保存した client_secret.json} .
+### ブラウザが起動できる環境で!
+### sshでリモートログインしている場合は要注意
+(env1)$ ./gdrive-client.sh ~/env1 /
+### ブラウザが起動し、確認を求められる
+### 2回目以降はブラウザ不要
 ```
 
 
-## 3. usage
+## 2. usage
 
 ヘルプ参照
 
@@ -50,7 +44,7 @@ $ . ./bin/activate
 $ gdrive-client.sh ~/env1 -h
 ```
 
-## 4. backup-ScanSnap.sh
+## 3. backup-ScanSnap.sh
 
 
 ## A. 参考

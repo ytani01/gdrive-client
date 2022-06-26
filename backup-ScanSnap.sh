@@ -7,7 +7,7 @@ SRC_DIR=ScanSnap
 DST_DIR=/common/Win/Scan/_tmp
 echo "DST_DIR=$DST_DIR"
 
-VENVDIR=$HOME/env3-gdrive
+VENVDIR=$HOME/env8-gdrive
 VENV_SUBDIR=gdrive-client
 
 
